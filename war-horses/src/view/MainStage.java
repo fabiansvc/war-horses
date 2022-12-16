@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 /**
  *
- * @author Fabian and Lady
+ * @author Fabián Valencia
  */
 
 import java.io.IOException;
@@ -16,13 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class WarHorsesStage extends Stage  {
+public class MainStage extends Stage  {
     
     private FXMLLoader loader;
-    /**
-     * Constructor de WarHorsesStage
-     */
-    public WarHorsesStage() {
+    
+    public MainStage() {
         try {
             loader = new FXMLLoader(getClass().getResource("/view/FXMLMain.fxml"));
             Parent root = loader.load();
@@ -39,16 +33,16 @@ public class WarHorsesStage extends Stage  {
     }
 
     public static void deleteInstance() {
-        WarHorsesStageHolder.INSTANCE.close();
-        WarHorsesStageHolder.INSTANCE = null;
+        MainStageHolder.INSTANCE.close();
+        MainStageHolder.INSTANCE = null;
     }
 
-    public static WarHorsesStage getInstance() {
-        return WarHorsesStageHolder.INSTANCE = new WarHorsesStage();
+    public static MainStage getInstance() {
+        return MainStageHolder.INSTANCE = new MainStage();
     }
 
-    private static class WarHorsesStageHolder {
+    private static class MainStageHolder {
 
-        private static WarHorsesStage INSTANCE;
+        private static MainStage INSTANCE;
     }
 }
