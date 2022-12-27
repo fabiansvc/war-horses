@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class BoardChess {
 
-    // 0: empty, 1:red horse, 2: green horse, 3: bonus.
+    // 0: Empty, 1: Red horse, 2: Green horse, 3: Bonus.
     private int[][] board;
     private ArrayList<int[]> bonusPosition;
 
