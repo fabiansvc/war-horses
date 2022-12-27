@@ -7,13 +7,13 @@ import java.util.Arrays;
  *
  * @author Fabian Valencia
  */
-public class Board {
+public class BoardChess {
 
     // 0: empty, 1:red horse, 2: green horse, 3: bonus.
     private int[][] board;
     private ArrayList<int[]> bonusPosition;
 
-    public Board() {
+    public BoardChess() {
         board = new int[8][8];
         bonusPosition = new ArrayList<int[]>();
 
