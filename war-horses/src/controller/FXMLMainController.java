@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
-
 /**
  * FXML Controller class
  *
@@ -42,8 +41,9 @@ public class FXMLMainController implements Initializable {
             rootModule.setCenter(loader.load());
             FXMLGameController control = loader.getController();
             control.setGameLevel(gameLevel);
+            
         } catch (IOException ex) {
-            System.err.println("Error to load FXMLGame.fxml");
+            System.err.println(ex);
         }
     }
 }
