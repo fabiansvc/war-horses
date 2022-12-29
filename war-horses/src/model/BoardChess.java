@@ -40,11 +40,19 @@ public class BoardChess {
         }
     }
 
-    private void addBonusPosition(int row, int col) {
-        int[] position = new int[2];
-        position[0] = row;
-        position[1] = col;
-        bonusPosition.add(position);
+    private boolean isCorrectedBonusPosition(ArrayList<int[]> bonusPosition, ArrayList<int[]> tempBonusNeigboors) {
+        for (int i = 0; i < bonusPosition.size(); i++) {
+            int[] position = bonusPosition.get(i);
+
+            for (int j = 0; j < tempBonusNeigboors.size(); j++) {
+                int[] tempBonusNeigboor = tempBonusNeigboors.get(j);
+                
+                if (tempBonusNeigboor[0] * tempBonusNeigboor[1] >= 0 && tempBonusNeigboor[0] == position[0] && tempBonusNeigboor[1] == position[1]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private ArrayList<int[]> getBonusNeighboors(int row, int col) {
@@ -98,18 +106,23 @@ public class BoardChess {
         return bonusNeigboors;
     }
 
-    private boolean isCorrectedBonusPosition(ArrayList<int[]> bonusPosition, ArrayList<int[]> tempBonusNeigboors) {
-        for (int i = 0; i < bonusPosition.size(); i++) {
-            int[] position = bonusPosition.get(i);
+    private void addBonusPosition(int row, int col) {
+        int[] position = new int[2];
+        position[0] = row;
+        position[1] = col;
+        bonusPosition.add(position);
+    }
 
-            for (int j = 0; j < tempBonusNeigboors.size(); j++) {
-                int[] tempBonusNeigboor = tempBonusNeigboors.get(j);
-                if (tempBonusNeigboor[0] * tempBonusNeigboor[1] >= 0 && tempBonusNeigboor[0] == position[0] && tempBonusNeigboor[1] == position[1]) {
-                    return true;
-                }
+    private void placeHorses() {
+        int i = 1;
+        while (i < 3) {
+            int row = (int) (Math.random() * 8);
+            int col = (int) (Math.random() * 8);
+            if (board[row][col] != 3 && board[row][col] == 0) {
+                board[row][col] = i;
+                i++;
             }
         }
-        return false;
     }
 
     public int[][] getBoard() {
@@ -120,22 +133,9 @@ public class BoardChess {
         this.board = board;
     }
 
-    private void placeHorses() {
-        int i = 1;
-        while (i<3) {
-            int row = (int) (Math.random() * 8);
-            int col = (int) (Math.random() * 8);
-            if (board[row][col] != 3 && board[row][col] == 0) {
-                board[row][col] = i;
-                i++;
-            }
-        }
-    }
-
     public void showBoard() {
         for (int[] ints : board) {
             System.out.println(Arrays.toString(ints));
         }
     }
-
 }
