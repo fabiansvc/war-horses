@@ -12,10 +12,13 @@ public class BoardChess {
     // 0: Empty, 1: Red horse, 2: Green horse, 3: Bonus.
     private int[][] board;
     private ArrayList<int[]> bonusPosition;
+    private int[] positionGreenHorse, positionRedHorse;
 
     public BoardChess() {
         board = new int[8][8];
         bonusPosition = new ArrayList<int[]>();
+        positionGreenHorse = new int[2];
+        positionRedHorse = new int[2];
 
         placeBonus();
         placeHorses();
@@ -46,8 +49,8 @@ public class BoardChess {
 
             for (int j = 0; j < tempBonusNeigboors.size(); j++) {
                 int[] tempBonusNeigboor = tempBonusNeigboors.get(j);
-                
-                if (tempBonusNeigboor[0] * tempBonusNeigboor[1] >= 0 && tempBonusNeigboor[0] == position[0] && tempBonusNeigboor[1] == position[1]) {
+
+                if (tempBonusNeigboor[0] >= 0 && tempBonusNeigboor[1] >= 0 && tempBonusNeigboor[0] == position[0] && tempBonusNeigboor[1] == position[1]) {
                     return true;
                 }
             }
@@ -120,6 +123,16 @@ public class BoardChess {
             int col = (int) (Math.random() * 8);
             if (board[row][col] != 3 && board[row][col] == 0) {
                 board[row][col] = i;
+                
+                int[] position = new int[2];
+                position[0] = row;
+                position[1] = col;
+                
+                if (i == 1) {
+                    positionRedHorse = position;
+                } else {
+                    positionGreenHorse = position;
+                }
                 i++;
             }
         }
@@ -132,6 +145,31 @@ public class BoardChess {
     public void setBoard(int[][] board) {
         this.board = board;
     }
+
+    public int[] getPositionGreenHorse() {
+        return positionGreenHorse;
+    }
+
+    public void setPositionGreenHorse(int[] positionGreenHorse) {
+        this.positionGreenHorse = positionGreenHorse;
+    }
+
+    public int[] getPositionRedHorse() {
+        return positionRedHorse;
+    }
+
+    public void setPositionRedHorse(int[] positionRedHorse) {
+        this.positionRedHorse = positionRedHorse;
+    }
+
+    public ArrayList<int[]> getBonusPosition() {
+        return bonusPosition;
+    }
+
+    public void setBonusPosition(ArrayList<int[]> bonusPosition) {
+        this.bonusPosition = bonusPosition;
+    }
+   
 
     public void showBoard() {
         for (int[] ints : board) {
