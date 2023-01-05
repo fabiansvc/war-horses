@@ -6,10 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import model.BoardChess;
 import model.CanvasWarHorses;
 import model.GreenHorse;
@@ -19,12 +16,10 @@ public class FXMLGameController implements Initializable {
     @FXML
     private Canvas canvas;
     private CanvasWarHorses canvasWarHorses;
-
-
     private BoardChess boardChesse;
     private GreenHorse greenHorse;
     private RedHorse redHorse;
-    
+   
     private String gameLevel;
     
     @Override
@@ -43,9 +38,8 @@ public class FXMLGameController implements Initializable {
                 new Image("/resources/boxes/redBox.png"),
                 new ArrayList<int[]>()
         );
-        
+                       
         canvasWarHorses = new CanvasWarHorses(canvas, boardChesse, canvas.getGraphicsContext2D(), redHorse, greenHorse);
-        
         canvasWarHorses.setCanvas();
         canvasWarHorses.listener();
     }

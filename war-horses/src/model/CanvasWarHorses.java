@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ public class CanvasWarHorses {
     private GraphicsContext gc;
     private RedHorse redHorse;
     private GreenHorse greenHorse;
+
 
     public CanvasWarHorses(Canvas canvas, BoardChess boardChess, GraphicsContext gc, RedHorse redHorse, GreenHorse greenHorse) {
         this.canvas = canvas;
@@ -83,7 +85,7 @@ public class CanvasWarHorses {
                 if (rowMovementClicked >= 0 && colMovementClicked >= 0 && rowMovementClicked < 8 && colMovementClicked < 8) {
                     if (row == rowMovementClicked && col == colMovementClicked) {
                         clearPosiblesMovements();
-                        updateBoard(row, col);
+                        updateBoard(rowMovementClicked, colMovementClicked);
                         listener();
                     }
                 }
@@ -102,12 +104,26 @@ public class CanvasWarHorses {
                     gc.setStroke(Color.WHITE);
                     gc.strokeRect(colMovement * 60 + 6, rowMovement * 60 + 6, 48, 48);
                 }
+                
             }
         }
         greenHorse.getPosiblesMovements().clear();
     }
 
-    private void updateBoard(int row, int col) {
+    private void updateBoard(int row, int col) {        
+        if(boardChess.getBoard()[row][col] == 3){
+            ArrayList<int[]> neighbors = getNeighbors(row, col);
+            
+            for (int i = 0; i < neighbors.size(); i++) {
+                int rowNeighbor = neighbors.get(i)[0];
+                int colNeighbor = neighbors.get(i)[1];
+                if(rowNeighbor >= 0 && rowNeighbor < 8 && colNeighbor >= 0 && colNeighbor < 8){
+                    gc.drawImage(greenHorse.getBox(), colNeighbor * 60,rowNeighbor * 60, 60, 60);
+                    boardChess.getBoard()[rowNeighbor][colNeighbor] = 5;                    
+                }                   
+            }
+        }
+        
         boardChess.getBoard()[greenHorse.getPosition()[0]][greenHorse.getPosition()[1]] = 5;
         gc.drawImage(greenHorse.getBox(), greenHorse.getPosition()[1] * 60, greenHorse.getPosition()[0] * 60, 60, 60);
 
@@ -118,6 +134,34 @@ public class CanvasWarHorses {
         boardChess.setPositionGreenHorse(positionGreenHorse);
         greenHorse.setPosition(positionGreenHorse);
         boardChess.showBoard();
+      
     }
+    
+     private ArrayList<int[]> getNeighbors(int row, int col) {                
+        ArrayList<int[]> neighbors = new ArrayList();        
+
+        int[] left = new int[2];
+        left[0] = row;
+        left[1] = col - 1;
+        neighbors.add(left);
+
+        int[] top = new int[2];
+        top[0] = row - 1;
+        top[1] = col;
+        neighbors.add(top);
+
+        int[] right = new int[2];
+        right[0] = row;
+        right[1] = col + 1;
+        neighbors.add(right);
+
+        int[] bottom = new int[2];
+        bottom[0] = row + 1;
+        bottom[1] = col;
+        neighbors.add(bottom);
+        
+        return neighbors;
+    }    
+   
 
 }
