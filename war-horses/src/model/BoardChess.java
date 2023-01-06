@@ -3,10 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- *
- * @author Fabian Valencia
- */
 public class BoardChess {
 
     // 0: Empty, 1: Red horse, 2: Green horse, 3: Bonus.
@@ -110,9 +106,7 @@ public class BoardChess {
     }
 
     private void addBonusPosition(int row, int col) {
-        int[] position = new int[2];
-        position[0] = row;
-        position[1] = col;
+        int[] position = {row, col};
         bonusPosition.add(position);
     }
 
@@ -122,11 +116,8 @@ public class BoardChess {
             int row = (int) (Math.random() * 8);
             int col = (int) (Math.random() * 8);
             if (board[row][col] != 3 && board[row][col] == 0) {
-                board[row][col] = i;
-                
-                int[] position = new int[2];
-                position[0] = row;
-                position[1] = col;
+                board[row][col] = i;                
+                int[] position = {row, col};
                 
                 if (i == 1) {
                     positionRedHorse = position;
@@ -140,10 +131,6 @@ public class BoardChess {
 
     public int[][] getBoard() {
         return board;
-    }
-
-    public void setBoard(int[][] board) {
-        this.board = board;
     }
 
     public int[] getPositionGreenHorse() {
@@ -161,16 +148,7 @@ public class BoardChess {
     public void setPositionRedHorse(int[] positionRedHorse) {
         this.positionRedHorse = positionRedHorse;
     }
-
-    public ArrayList<int[]> getBonusPosition() {
-        return bonusPosition;
-    }
-
-    public void setBonusPosition(ArrayList<int[]> bonusPosition) {
-        this.bonusPosition = bonusPosition;
-    }
-   
-
+  
     public void showBoard() {
         for (int[] ints : board) {
             System.out.println(Arrays.toString(ints));

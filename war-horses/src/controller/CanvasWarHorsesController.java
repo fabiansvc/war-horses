@@ -1,21 +1,44 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import model.BoardChess;
+import model.Horse;
 
-public class CanvasWarHorses {
-
+public class CanvasWarHorsesController {
     private Canvas canvas;
     private BoardChess boardChess;
     private GraphicsContext gc;
 
-    public CanvasWarHorses(Canvas canvas, BoardChess boardChess, GraphicsContext gc) {
+    public CanvasWarHorsesController(Canvas canvas, BoardChess boardChess, GraphicsContext gc) {
         this.canvas = canvas;
         this.boardChess = boardChess;
         this.gc = gc;
+    }
+    
+    public void setCanvas(Image bonusImage, Image redHorseImage, Image greenHorseImage) {
+        canvas.setHeight(480);
+        canvas.setWidth(480);
+
+        for (int i = 0; i <= boardChess.getBoard().length; i++) {
+            gc.strokeLine(0, i * 60, 480, i * 60);
+            gc.strokeLine(i * 60, 0, i * 60, 480);
+        }
+
+        for (int i = 0; i < boardChess.getBoard().length; i++) {
+            for (int j = 0; j < boardChess.getBoard().length; j++) {
+                if (boardChess.getBoard()[i][j] == 3) {
+                    gc.drawImage(bonusImage, j * 60 + 6, i * 60 + 6, 48, 48);
+                } else if (boardChess.getBoard()[i][j] == 1) {
+                    gc.drawImage(redHorseImage, j * 60, i * 60, 60, 60);
+                } else if (boardChess.getBoard()[i][j] == 2) {
+                    gc.drawImage(greenHorseImage, j * 60, i * 60, 60, 60);
+                }
+            }
+        }
     }
 
     public void placePosiblesMovements(Horse horse) {
@@ -32,7 +55,6 @@ public class CanvasWarHorses {
             }
         }
     }
-
 
     public void clearPosiblesMovements(Horse horse) {
         for (int i = 0; i < horse.getPosiblesMovements().size(); i++) {
@@ -58,7 +80,7 @@ public class CanvasWarHorses {
             for (int i = 0; i < neighbors.size(); i++) {
                 int rowNeighbor = neighbors.get(i)[0];
                 int colNeighbor = neighbors.get(i)[1];
-                if(rowNeighbor >= 0 && rowNeighbor < 8 && colNeighbor >= 0 && colNeighbor < 8){
+                if(rowNeighbor >= 0 && rowNeighbor < 8 && colNeighbor >= 0 && colNeighbor < 8 && boardChess.getBoard()[rowNeighbor][colNeighbor] == 0){
                     gc.drawImage(horse.getBox(), colNeighbor * 60,rowNeighbor * 60, 60, 60);
                     boardChess.getBoard()[rowNeighbor][colNeighbor] = 5;                    
                 }                   
@@ -74,7 +96,7 @@ public class CanvasWarHorses {
         int[] positionGreenHorse = {row, col};
         boardChess.setPositionGreenHorse(positionGreenHorse);
         horse.setPosition(positionGreenHorse);
-        boardChess.showBoard();
+//        boardChess.showBoard();
       
     }
     

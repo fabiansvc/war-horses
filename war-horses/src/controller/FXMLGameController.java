@@ -10,24 +10,23 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import model.BoardChess;
-import model.CanvasWarHorses;
 import model.Horse;
 
 public class FXMLGameController implements Initializable {
-
     @FXML
     private Canvas canvas;
-    private CanvasWarHorses canvasWarHorses;
+    private CanvasWarHorsesController canvasWarHorsesController;
     private BoardChess boardChess;
     private Horse greenHorse;
     private Horse redHorse;
     private GraphicsContext gc;
-
     private String gameLevel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        boardChess = new BoardChess();
+        boardChess = new BoardChess();        
+        gc = canvas.getGraphicsContext2D();
+        
         greenHorse = new Horse(
                 new Image("/resources/horses/greenHorse.png"),
                 boardChess.getPositionGreenHorse(),
@@ -42,42 +41,18 @@ public class FXMLGameController implements Initializable {
                 new ArrayList<int[]>()
         );
 
-        gc = canvas.getGraphicsContext2D();
-
-        canvasWarHorses = new CanvasWarHorses(canvas, boardChess, gc);
-        setCanvas();
-        BoardChessListener();
+        canvasWarHorsesController = new CanvasWarHorsesController(canvas, boardChess, gc);
+        canvasWarHorsesController.setCanvas(new Image("/resources/bonus/bonus.png"), redHorse.getImage(), greenHorse.getImage());
+        boardChessListener();
     }
 
-    public void setCanvas() {
-        canvas.setHeight(480);
-        canvas.setWidth(480);
-
-        for (int i = 0; i <= boardChess.getBoard().length; i++) {
-            gc.strokeLine(0, i * 60, 480, i * 60);
-            gc.strokeLine(i * 60, 0, i * 60, 480);
-        }
-
-        for (int i = 0; i < boardChess.getBoard().length; i++) {
-            for (int j = 0; j < boardChess.getBoard().length; j++) {
-                if (boardChess.getBoard()[i][j] == 3) {
-                    gc.drawImage(new Image("/resources/bonus/bonus.png"), j * 60 + 6, i * 60 + 6, 48, 48);
-                } else if (boardChess.getBoard()[i][j] == 1) {
-                    gc.drawImage(redHorse.getImage(), j * 60, i * 60, 60, 60);
-                } else if (boardChess.getBoard()[i][j] == 2) {
-                    gc.drawImage(greenHorse.getImage(), j * 60, i * 60, 60, 60);
-                }
-            }
-        }
-    }
-
-    private void BoardChessListener() {
+    private void boardChessListener() {
         canvas.setOnMouseClicked((MouseEvent event) -> {
             int row = (int) event.getSceneY() / 60;
             int col = (int) event.getSceneX() / 60;
             if (boardChess.getBoard()[row][col] == 2) {
                 greenHorse.findPosiblesMovements();
-                canvasWarHorses.placePosiblesMovements(greenHorse);
+                canvasWarHorsesController.placePosiblesMovements(greenHorse);
                 posiblesMovementsListener(greenHorse);                
             }
         });
@@ -93,9 +68,9 @@ public class FXMLGameController implements Initializable {
 
                 if (rowMovementClicked >= 0 && colMovementClicked >= 0 && rowMovementClicked < 8 && colMovementClicked < 8) {
                     if (row == rowMovementClicked && col == colMovementClicked) {
-                        canvasWarHorses.clearPosiblesMovements(horse);
-                        canvasWarHorses.updateBoard(rowMovementClicked, colMovementClicked, horse);
-                        BoardChessListener();
+                        canvasWarHorsesController.clearPosiblesMovements(horse);
+                        canvasWarHorsesController.updateBoard(rowMovementClicked, colMovementClicked, horse);
+                        boardChessListener();
                     }
                 }
             }
@@ -105,5 +80,4 @@ public class FXMLGameController implements Initializable {
     public void setGameLevel(String gameLevel) {
         this.gameLevel = gameLevel;
     }
-
 }
