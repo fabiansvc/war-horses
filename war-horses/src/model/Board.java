@@ -3,14 +3,18 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BoardChess {
+public class Board {
 
     // 0: Empty, 1: Red horse, 2: Green horse, 3: Bonus.
     private int[][] board;
     private ArrayList<int[]> bonusPosition;
     private int[] positionGreenHorse, positionRedHorse;
 
-    public BoardChess() {
+    public Board() {
+
+    }
+
+    public void printBoard() {
         board = new int[8][8];
         bonusPosition = new ArrayList<int[]>();
         positionGreenHorse = new int[2];
@@ -116,9 +120,9 @@ public class BoardChess {
             int row = (int) (Math.random() * 8);
             int col = (int) (Math.random() * 8);
             if (board[row][col] != 3 && board[row][col] == 0) {
-                board[row][col] = i;                
+                board[row][col] = i;
                 int[] position = {row, col};
-                
+
                 if (i == 1) {
                     positionRedHorse = position;
                 } else {
@@ -131,6 +135,10 @@ public class BoardChess {
 
     public int[][] getBoard() {
         return board;
+    }
+
+    public void setBoard(int[][] board) {
+        this.board = board;
     }
 
     public int[] getPositionGreenHorse() {
@@ -148,7 +156,77 @@ public class BoardChess {
     public void setPositionRedHorse(int[] positionRedHorse) {
         this.positionRedHorse = positionRedHorse;
     }
-  
+
+    public int[][] updateBoard(int row, int col, int[][] status, Horse horse) {
+
+        int tab = status[row][col];
+        if (tab == 3) {
+            ArrayList<int[]> neighbors = getNeighbors(row, col);
+
+            for (int i = 0; i < neighbors.size(); i++) {
+                int rowNeighbor = neighbors.get(i)[0];
+                int colNeighbor = neighbors.get(i)[1];
+                if (rowNeighbor >= 0 && rowNeighbor < 8 && colNeighbor >= 0 && colNeighbor < 8 && status[rowNeighbor][colNeighbor] == 0) {
+                    int[] valueRow = status[rowNeighbor].clone();
+                    valueRow[colNeighbor] = horse.getValueBox();
+                    status[rowNeighbor] = valueRow;
+                }
+            }
+        }
+
+        if (tab == 0 || tab == 3) {
+            int[] valueRow = status[horse.getPosition()[0]].clone();
+            valueRow[horse.getPosition()[1]] = horse.getValueBox();
+            status[horse.getPosition()[0]] = valueRow;
+
+            int[] valueRowHorse = status[row].clone();
+            valueRowHorse[col] = horse.getValueHorse();
+            status[row] = valueRowHorse;
+
+        }
+
+        return status;
+
+    }
+
+    private ArrayList<int[]> getNeighbors(int row, int col) {
+        ArrayList<int[]> neighbors = new ArrayList();
+
+        int[] left = new int[2];
+        left[0] = row;
+        left[1] = col - 1;
+        neighbors.add(left);
+
+        int[] top = new int[2];
+        top[0] = row - 1;
+        top[1] = col;
+        neighbors.add(top);
+
+        int[] right = new int[2];
+        right[0] = row;
+        right[1] = col + 1;
+        neighbors.add(right);
+
+        int[] bottom = new int[2];
+        bottom[0] = row + 1;
+        bottom[1] = col;
+        neighbors.add(bottom);
+
+        return neighbors;
+    }
+
+    public int getValuesBox(int horse, int box, int[][] status) {
+        int cant = 0;
+        for (int i = 0; i < status.length; i++) {
+            for (int j = 0; j < status.length; j++) {
+                if (status[i][j] == horse || status[i][j] == box) {
+                    cant++;
+                }
+            }
+        }
+        return cant;
+    }
+
     public void showBoard() {
         for (int[] ints : board) {
             System.out.println(Arrays.toString(ints));

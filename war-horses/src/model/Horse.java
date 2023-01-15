@@ -2,22 +2,46 @@ package model;
 
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class Horse {
 
-    protected Image image;
-    protected int[] position;
-    protected Image box;
-    protected ArrayList<int[]> posiblesMovements;
+    private Image image;
+    private int[] position;
+    private Image box;
+    private ArrayList<int[]> posiblesMovements;
+    private int valueHorse;
+    private int valueBox;
 
-    public Horse(Image image, int[] position, Image box, ArrayList<int[]> posiblesMovements) {
+    public Horse(Image image, int[] position, Image box, ArrayList<int[]> posiblesMovements, int valueHorse, int valueBox) {
         this.image = image;
         this.position = position;
         this.box = box;
         this.posiblesMovements = posiblesMovements;
+        this.valueHorse = valueHorse;
+        this.valueBox = valueBox;
+
+    }
+
+    public int getValueHorse() {
+        return valueHorse;
+    }
+
+    public void setValueHorse(int valueHorse) {
+        this.valueHorse = valueHorse;
+    }
+
+    public int getValueBox() {
+        return valueBox;
+    }
+
+    public void setValueBox(int valueBox) {
+        this.valueBox = valueBox;
     }
 
     public void findPosiblesMovements() {
+        posiblesMovements.clear();
+        
         int row = position[0];
         int col = position[1];
 
@@ -60,6 +84,34 @@ public class Horse {
         rightBottom[0] = row + 2;
         rightBottom[1] = col + 1;
         posiblesMovements.add(rightBottom);
+
+    }
+
+    public ArrayList<int[]> correctPosiblesMovements(int[][] board) {
+        ArrayList<int[]> posiblesMovementsAux = new ArrayList<>();
+        
+        for (int i = 0; i < posiblesMovements.size(); i++) {
+            int rowMovement = posiblesMovements.get(i)[0];
+            int colMovement = posiblesMovements.get(i)[1];
+
+            if (rowMovement >= 0 && colMovement >= 0 && rowMovement < 8 && colMovement < 8) {
+                int tab = board[rowMovement][colMovement];
+                if (tab == 0 || tab == 3) {
+                    posiblesMovementsAux.add(posiblesMovements.get(i));
+                }
+            }
+        }
+//      showPosibleMovements();
+        return posiblesMovementsAux;
+    }
+
+    private void showPosibleMovements() {
+        for (int i = 0; i < posiblesMovements.size(); i++) {
+
+            int rowMovement = posiblesMovements.get(i)[0];
+            int colMovement = posiblesMovements.get(i)[1];
+//            System.out.println("Horse: " + this.getValueHorse() + "," + rowMovement + "," + colMovement);
+        }
     }
 
     public Image getImage() {

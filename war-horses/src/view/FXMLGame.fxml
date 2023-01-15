@@ -25,5 +25,6 @@
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </GridPane.margin>
       </Canvas>
+      <Button mnemonicParsing="false" onAction="#initHandle" text="Init" GridPane.columnIndex="1" />
    </children>
 </GridPane>
