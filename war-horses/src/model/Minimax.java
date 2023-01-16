@@ -13,7 +13,7 @@ public class Minimax {
     public Minimax(int depth) {
         this.depth = depth;
         board = new Board();
-        root = new ArrayList<Node>();
+        root = new ArrayList<>();
         redHorse = new Horse(null, null, null, 1, 6);
         greenHorse = new Horse(null, null, null, 2, 5);
     }

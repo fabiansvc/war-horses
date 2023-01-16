@@ -80,13 +80,9 @@ public class CanvasWarHorsesController {
     }
 
     public void updateBoard(int row, int col, Horse horse) {
-
         int tab = board.getBoard()[row][col];
-
-        if (tab == 3) {
-            
+        if (tab == 3) {            
             ArrayList<int[]> neighbors = getNeighbors(row, col);
-
             for (int i = 0; i < neighbors.size(); i++) {
                 int rowNeighbor = neighbors.get(i)[0];
                 int colNeighbor = neighbors.get(i)[1];
@@ -98,7 +94,6 @@ public class CanvasWarHorsesController {
         }
 
         if (tab == 0 || tab == 3) {
-//            System.out.println("llego");
             board.getBoard()[horse.getPosition()[0]][horse.getPosition()[1]] = horse.getValueBox();
             gc.drawImage(horse.getBox(), horse.getPosition()[1] * 60, horse.getPosition()[0] * 60, 60, 60);
 
@@ -108,7 +103,6 @@ public class CanvasWarHorsesController {
             int[] positionGreenHorse = {row, col};
             board.setPositionGreenHorse(positionGreenHorse);
             horse.setPosition(positionGreenHorse);
-//            board.showBoard();  
         }
 
     }

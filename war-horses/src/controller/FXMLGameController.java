@@ -107,13 +107,13 @@ public class FXMLGameController implements Initializable {
     public void setGameLevel(String gameLevel) {
         int depth = -1;
         switch (gameLevel.toLowerCase()) {
-            case "easy":
+            case "beginner":
                 depth = 2;
                 break;
-            case "medium":
+            case "amateur":
                 depth = 4;
                 break;
-            case "hard":
+            case "expert":
                 depth = 6;
                 break;
             default:
@@ -123,13 +123,13 @@ public class FXMLGameController implements Initializable {
     }
 
     @FXML
-    public void onStartHandle(ActionEvent event) {
+    private void onStartHandle(ActionEvent event) {
         startBtn.setVisible(false);
         tick();
     }
 
     @FXML
-    public void onReturnHandle(ActionEvent event) {
+    private void onReturnHandle(ActionEvent event) {
 
     }
 

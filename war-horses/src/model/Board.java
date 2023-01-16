@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class Board {
 
-    // 0: Empty, 1: Red horse, 2: Green horse, 3: Bonus.
     private int[][] board;
     private ArrayList<int[]> bonusPosition;
     private int[] positionGreenHorse, positionRedHorse;
@@ -15,7 +14,7 @@ public class Board {
 
     public void printBoard() {
         board = new int[8][8];
-        bonusPosition = new ArrayList<int[]>();
+        bonusPosition = new ArrayList<>();
         positionGreenHorse = new int[2];
         positionRedHorse = new int[2];
 
@@ -157,7 +156,6 @@ public class Board {
     }
 
     public int[][] updateBoard(int row, int col, int[][] status, Horse horse) {
-
         int tab = status[row][col];
         if (tab == 3) {
             ArrayList<int[]> neighbors = getNeighbors(row, col);
@@ -183,9 +181,7 @@ public class Board {
             status[row] = valueRowHorse;
 
         }
-
         return status;
-
     }
 
     private ArrayList<int[]> getNeighbors(int row, int col) {
@@ -215,18 +211,19 @@ public class Board {
     }
 
     public int getValuesBoxbyHorse(int valueHorse, int valueBox, int[][] board) {
-        int val = 0;
+        int value = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j] == valueHorse || board[i][j] == valueBox) {
-                    val++;
+                    value++;
                 }
             }
         }
-        return val;
+        return value;
     }
 
     public void showBoard() {
+        System.out.println();
         for (int[] ints : board) {
             System.out.println(Arrays.toString(ints));
         }
