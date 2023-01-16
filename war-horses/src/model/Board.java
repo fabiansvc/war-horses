@@ -11,7 +11,6 @@ public class Board {
     private int[] positionGreenHorse, positionRedHorse;
 
     public Board() {
-
     }
 
     public void printBoard() {
@@ -215,16 +214,16 @@ public class Board {
         return neighbors;
     }
 
-    public int getValuesBox(int horse, int box, int[][] status) {
-        int cant = 0;
-        for (int i = 0; i < status.length; i++) {
-            for (int j = 0; j < status.length; j++) {
-                if (status[i][j] == horse || status[i][j] == box) {
-                    cant++;
+    public int getValuesBoxbyHorse(int valueHorse, int valueBox, int[][] board) {
+        int val = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == valueHorse || board[i][j] == valueBox) {
+                    val++;
                 }
             }
         }
-        return cant;
+        return val;
     }
 
     public void showBoard() {

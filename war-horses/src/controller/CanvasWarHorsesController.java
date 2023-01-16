@@ -1,9 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -34,21 +31,27 @@ public class CanvasWarHorsesController {
 
         for (int i = 0; i < board.getBoard().length; i++) {
             for (int j = 0; j < board.getBoard().length; j++) {
-                if (board.getBoard()[i][j] == 3) {
-                    gc.drawImage(bonusImage, j * 60 + 6, i * 60 + 6, 48, 48);
-                } else if (board.getBoard()[i][j] == 1) {
-                    gc.drawImage(redHorseImage, j * 60, i * 60, 60, 60);
-                } else if (board.getBoard()[i][j] == 2) {
-                    gc.drawImage(greenHorseImage, j * 60, i * 60, 60, 60);
+                switch (board.getBoard()[i][j]) {
+                    case 3:
+                        gc.drawImage(bonusImage, j * 60 + 6, i * 60 + 6, 48, 48);
+                        break;
+                    case 1:
+                        gc.drawImage(redHorseImage, j * 60, i * 60, 60, 60);
+                        break;
+                    case 2:
+                        gc.drawImage(greenHorseImage, j * 60, i * 60, 60, 60);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
     }
 
-    public void placePosiblesMovements(Horse horse) {
-        for (int i = 0; i < horse.getPosiblesMovements().size(); i++) {
-            int rowMovement = horse.getPosiblesMovements().get(i)[0];
-            int colMovement = horse.getPosiblesMovements().get(i)[1];
+    public void placePosiblesMovements(Horse horse, ArrayList<int[]> posiblesMovements) {
+        for (int i = 0; i < posiblesMovements.size(); i++) {
+            int rowMovement = posiblesMovements.get(i)[0];
+            int colMovement = posiblesMovements.get(i)[1];
 
             if (rowMovement >= 0 && colMovement >= 0 && rowMovement < 8 && colMovement < 8) {
                 int tab = board.getBoard()[rowMovement][colMovement];
@@ -60,10 +63,10 @@ public class CanvasWarHorsesController {
         }
     }
 
-    public void printPosiblesMovements(Horse horse) {
-        for (int i = 0; i < horse.getPosiblesMovements().size(); i++) {
-            int rowMovement = horse.getPosiblesMovements().get(i)[0];
-            int colMovement = horse.getPosiblesMovements().get(i)[1];
+    public void printPosiblesMovements(Horse horse, ArrayList<int[]> posiblesMovements) {
+        for (int i = 0; i < posiblesMovements.size(); i++) {
+            int rowMovement = posiblesMovements.get(i)[0];
+            int colMovement = posiblesMovements.get(i)[1];
 
             if (rowMovement >= 0 && colMovement >= 0 && rowMovement < 8 && colMovement < 8) {
                 int tab = board.getBoard()[rowMovement][colMovement];

@@ -4,13 +4,13 @@ package model;
  *
  * @author Fabián Valencia
  */
-
 public class Node {
+
     private Node parent;
     private String type;
     private int depth;
     private double utility;
-    private int [][] status;
+    private int[][] status;
     private int[] positionRedHorse, positionGreenHorse;
 
     public Node(Node parent, String type, int depth, double utility, int[][] status, int[] positionRedHorse, int[] positionGreenHorse) {
@@ -79,5 +79,4 @@ public class Node {
         this.positionGreenHorse = positionGreenHorse;
     }
 
-      
 }

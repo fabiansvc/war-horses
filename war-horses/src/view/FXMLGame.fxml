@@ -25,6 +25,76 @@
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </GridPane.margin>
       </Canvas>
-      <Button mnemonicParsing="false" onAction="#initHandle" text="Init" GridPane.columnIndex="1" />
+      <Button fx:id="startBtn" mnemonicParsing="false" onAction="#onStartHandle" prefWidth="96.0" text="Start" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="64.0" right="16.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" onAction="#onReturnHandle" prefWidth="96.0" text="Return" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="64.0" left="16.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Label text="Amount of tabs taken by" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="96.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label text="Red horse:" GridPane.columnIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="30.0" top="176.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Label>
+      <Label text="Green horse:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="16.0" top="144.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="amoutGreenHorse" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="96.0" top="144.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="amoutRedHorse" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="96.0" top="176.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="winnerLabel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="64.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="resultLabel" text="Result" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </GridPane>

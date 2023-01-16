@@ -18,10 +18,10 @@ import javafx.scene.layout.BorderPane;
  * @author Fabián Valencia
  */
 public class FXMLMainController implements Initializable {
-    
+
     @FXML
     private BorderPane rootModule;
-    
+
     @FXML
     private ComboBox<String> levelComboBox;
 
@@ -30,21 +30,26 @@ public class FXMLMainController implements Initializable {
         ObservableList<String> levelList = FXCollections.observableArrayList("Easy", "Medium", "Hard");
         levelComboBox.setItems(levelList);
         levelComboBox.setValue("Easy");
-    }    
+    }
 
     @FXML
     private void OnHandlePlay(ActionEvent event) {
         String gameLevel = levelComboBox.getSelectionModel().getSelectedItem().toLowerCase();
-        
-         try {
+
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FXMLGame.fxml"));
             rootModule.setCenter(loader.load());
             FXMLGameController control = loader.getController();
             control.setGameLevel(gameLevel);
-            
+
         } catch (IOException ex) {
             System.err.println(ex);
         }
     }
+
+    public BorderPane getRootModule() {
+        return rootModule;
+    }
+    
+    
 }
- 

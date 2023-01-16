@@ -2,22 +2,19 @@ package model;
 
 import java.util.ArrayList;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class Horse {
 
     private Image image;
     private int[] position;
     private Image box;
-    private ArrayList<int[]> posiblesMovements;
     private int valueHorse;
     private int valueBox;
 
-    public Horse(Image image, int[] position, Image box, ArrayList<int[]> posiblesMovements, int valueHorse, int valueBox) {
+    public Horse(Image image, int[] position, Image box, int valueHorse, int valueBox) {
         this.image = image;
         this.position = position;
         this.box = box;
-        this.posiblesMovements = posiblesMovements;
         this.valueHorse = valueHorse;
         this.valueBox = valueBox;
 
@@ -39,9 +36,10 @@ public class Horse {
         this.valueBox = valueBox;
     }
 
-    public void findPosiblesMovements() {
-        posiblesMovements.clear();
-        
+    public ArrayList<int[]> getPosiblesMovements(int[][] board) {
+        ArrayList<int[]> posiblesMovements = new ArrayList<>();
+        ArrayList<int[]> posiblesMovementsAux = new ArrayList<>();
+
         int row = position[0];
         int col = position[1];
 
@@ -85,11 +83,6 @@ public class Horse {
         rightBottom[1] = col + 1;
         posiblesMovements.add(rightBottom);
 
-    }
-
-    public ArrayList<int[]> correctPosiblesMovements(int[][] board) {
-        ArrayList<int[]> posiblesMovementsAux = new ArrayList<>();
-        
         for (int i = 0; i < posiblesMovements.size(); i++) {
             int rowMovement = posiblesMovements.get(i)[0];
             int colMovement = posiblesMovements.get(i)[1];
@@ -101,17 +94,8 @@ public class Horse {
                 }
             }
         }
-//      showPosibleMovements();
+
         return posiblesMovementsAux;
-    }
-
-    private void showPosibleMovements() {
-        for (int i = 0; i < posiblesMovements.size(); i++) {
-
-            int rowMovement = posiblesMovements.get(i)[0];
-            int colMovement = posiblesMovements.get(i)[1];
-//            System.out.println("Horse: " + this.getValueHorse() + "," + rowMovement + "," + colMovement);
-        }
     }
 
     public Image getImage() {
@@ -137,13 +121,4 @@ public class Horse {
     public void setBox(Image box) {
         this.box = box;
     }
-
-    public ArrayList<int[]> getPosiblesMovements() {
-        return posiblesMovements;
-    }
-
-    public void setPosiblesMovements(ArrayList<int[]> posiblesMovements) {
-        this.posiblesMovements = posiblesMovements;
-    }
-
 }
