@@ -89,6 +89,8 @@ public class CanvasWarHorsesController {
                 if (rowNeighbor >= 0 && rowNeighbor < 8 && colNeighbor >= 0 && colNeighbor < 8 && board.getBoard()[rowNeighbor][colNeighbor] == 0) {
                     gc.drawImage(horse.getBox(), colNeighbor * 60, rowNeighbor * 60, 60, 60);
                     board.getBoard()[rowNeighbor][colNeighbor] = horse.getValueBox();
+                    gc.setStroke(Color.BLACK);
+                    gc.strokeRect(colNeighbor * 60, rowNeighbor * 60, 60, 60);
                 }
             }
         }
@@ -96,7 +98,9 @@ public class CanvasWarHorsesController {
         if (tab == 0 || tab == 3) {
             board.getBoard()[horse.getPosition()[0]][horse.getPosition()[1]] = horse.getValueBox();
             gc.drawImage(horse.getBox(), horse.getPosition()[1] * 60, horse.getPosition()[0] * 60, 60, 60);
-
+            gc.setStroke(Color.BLACK);
+            gc.strokeRect(horse.getPosition()[1] * 60, horse.getPosition()[0] * 60, 60, 60);
+            
             gc.drawImage(horse.getImage(), col * 60, row * 60, 60, 60);
             board.getBoard()[row][col] = horse.getValueHorse();
 

@@ -35,7 +35,6 @@ public class FXMLMainController implements Initializable {
             rootModule.setCenter(loader.load());
             FXMLGameController control = loader.getController();
             control.setGameLevel(gameLevel);
-
         } catch (IOException ex) {
             System.err.println(ex);
         }
