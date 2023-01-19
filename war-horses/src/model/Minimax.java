@@ -54,13 +54,7 @@ public class Minimax {
             int cantTabsRedHorse = board.getValuesBoxbyHorse(redHorse.getValueHorse(), redHorse.getValueBox(), nodeMax.getStatus());
             int cantTabsGreenHorse = board.getValuesBoxbyHorse(greenHorse.getValueHorse(), greenHorse.getValueBox(), nodeMax.getStatus());
 
-            if (cantTabsGreenHorse > cantTabsRedHorse) {
-                nodeMax.setUtility(-1);
-            } else if (cantTabsGreenHorse < cantTabsRedHorse) {
-                nodeMax.setUtility(1);
-            } else {
-                nodeMax.setUtility(0);
-            }
+            nodeMax.setUtility(cantTabsRedHorse - cantTabsGreenHorse);
         } else {
             if (posiblesMovementsRedHorse.size() > 0) {
 
@@ -119,13 +113,8 @@ public class Minimax {
             int cantTabsRedHorse = board.getValuesBoxbyHorse(redHorse.getValueHorse(), redHorse.getValueBox(), nodeMin.getStatus());
             int cantTabsGreenHorse = board.getValuesBoxbyHorse(greenHorse.getValueHorse(), greenHorse.getValueBox(), nodeMin.getStatus());
 
-            if (cantTabsGreenHorse > cantTabsRedHorse) {
-                nodeMin.setUtility(-1);
-            } else if (cantTabsGreenHorse < cantTabsRedHorse) {
-                nodeMin.setUtility(1);
-            } else {
-                nodeMin.setUtility(0);
-            }
+            nodeMin.setUtility(cantTabsRedHorse - cantTabsGreenHorse);
+
         } else {
             if (posiblesMovementsGreenHorse.size() > 0) {
                 for (int i = 0; i < posiblesMovementsGreenHorse.size(); i++) {

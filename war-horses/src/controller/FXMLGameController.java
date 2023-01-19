@@ -128,11 +128,6 @@ public class FXMLGameController implements Initializable {
         tick();
     }
 
-    @FXML
-    private void onReturnHandle(ActionEvent event) {
-
-    }
-
     private void tick() {
         ArrayList<int[]> posiblesMovementsRedHorse = redHorse.getPosiblesMovements(board.getBoard());
         ArrayList<int[]> posiblesMovementsGreenHorse = greenHorse.getPosiblesMovements(board.getBoard());
