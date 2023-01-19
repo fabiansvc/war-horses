@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootModule" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="480.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/background-chesse.jpg" />
+               </image>
+            </ImageView>
+            <Pane layoutX="176.0" layoutY="131.0" opacity="0.8" prefHeight="240.0" prefWidth="368.0" style="-fx-background-color: black; -fx-background-radius: 32px;">
+               <children>
+                  <Label layoutX="130.0" layoutY="27.0" text="War Horses" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="107.0" text="Level:" textFill="WHITE">
+                     <font>
+                        <Font name="Candara" size="18.0" />
+                     </font></Label>
+                  <ComboBox fx:id="levelComboBox" layoutX="166.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="130.0" />
+                  <Button layoutX="158.0" layoutY="187.0" mnemonicParsing="false" onAction="#OnHandlePlay" prefHeight="27.0" prefWidth="73.0" text="Play">
+                     <font>
+                        <Font name="Candara" size="18.0" />
+                     </font></Button>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

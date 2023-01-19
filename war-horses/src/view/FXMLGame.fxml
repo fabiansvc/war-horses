@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" prefHeight="480.0" prefWidth="720.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLGameController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="480.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="240.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Canvas fx:id="canvas" height="480.0" width="480.0">
+         <GridPane.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </GridPane.margin>
+      </Canvas>
+      <Button fx:id="startBtn" mnemonicParsing="false" onAction="#onStartHandle" prefWidth="96.0" text="Start" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="64.0" right="16.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font></Button>
+      <Label text="Amount of boxes taken by" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="96.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label text="Red horse:" GridPane.columnIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="30.0" top="176.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Label>
+      <Label text="Green horse:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="16.0" top="144.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="amoutGreenHorse" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="96.0" top="144.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="amoutRedHorse" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="96.0" top="176.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="winnerLabel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="64.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="resultLabel" text="Result" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <font>
+            <Font name="Candara Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</GridPane>
